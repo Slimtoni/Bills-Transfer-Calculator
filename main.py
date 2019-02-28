@@ -18,7 +18,7 @@ class Transfer:
     def __str__(self):
         return str(self._amount) + " | " + self._date
 
-def calculateBill2(bills, transfers):
+def calculateBill(bills, transfers):
     if (bills.__len__() != 0 and transfers.__len__() != 0):
         for i in transfers:
             bestFitBills = ()
@@ -74,4 +74,4 @@ if __name__ == '__main__':
         print(i.__str__())
 
     print("Kalkulation: ----------------------------------------")
-    calculateBill2(billsList, transferList)
+    calculateBill(billsList, transferList)
