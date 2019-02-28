@@ -10,13 +10,13 @@ class Bill:
         self._descr = description
         self._date = date
     def __str__(self):
-        return str(self._amount) + " | " + self._descr + " | " + self._date
+        return self._descr + ": " + str(self._amount) + " vom " + self._date
 class Transfer:
     def __init__(self, amount, date):
         self._amount = amount
         self._date = date
     def __str__(self):
-        return str(self._amount) + " | " + self._date
+        return str(self._amount) + " vom " + self._date
 
 def calculateBill(bills, transfers):
     if (bills.__len__() != 0 and transfers.__len__() != 0):
@@ -42,11 +42,14 @@ def calculateBill(bills, transfers):
                             elif (sumOfBills > i._amount):
                                 sumOfBills = oldSumOfBills
                             oldSumOfBills = sumOfBills
-
-            print("    TransferAmount: " + str(i._amount))
-            print("    BestFitAmount: " + str(bestFitBillsSum))
+            print("")
+            print("Überweisung: " + str(i._amount) + " vom " + i._date)
+            print("gefundener, passender Betrag: " + str(bestFitBillsSum))
+            print("passende Rechnungen: ")
             for l in bestFitBills:
-                print("    " + l.__str__())
+                print(l.__str__())
+            print("-------------------------------------------------------------------------")
+
     else:
         print("Error: Leere Rechnungs- oder Überweisungsliste!")
 
@@ -64,14 +67,16 @@ def readTransfers(filename):
             transferList.append(Transfer(float(row[0]),row[1]))
 
 if __name__ == '__main__':
-    readBills('bills_test.csv')
-    readTransfers('transfers_test.csv')
+    readBills('bills.csv')
+    readTransfers('transfers.csv')
+    print("")
     print("Rechnungen: ")
     for i in billsList:
         print(i.__str__())
+    print("")
     print("Überweisungen: ")
     for i in transferList:
         print(i.__str__())
-
+    print("")
     print("Kalkulation: ----------------------------------------")
     calculateBill(billsList, transferList)
